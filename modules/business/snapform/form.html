@@ -1,0 +1,70 @@
+<div id=D__ID>
+    <section id=form_container__ID bp=576 style='display:flow-root;'>
+        <div class=header__ID>
+            <h1 class=t1__ID>Send Email to Patient</h1>
+        </div>
+    	<form id=F__ID>
+			<div class=r__ID>
+				<div w='100|50'>
+					<span><b>First Name</b></span>
+					<input type="text" name=First_Name required autocomplete=off required />
+				</div>
+				<div w='100|50'>
+					<span><b>Last Name</b></span>
+					<input type=text name=Last_Name required autocomplete=off required />
+				</div>
+			</div>
+			<div class=r__ID>
+				<div w='100|50'>
+					<span><b>Date of Birth</b></span>
+					<input type=date name=Date_of_Birth required ></input>
+				</div>
+				<div w='100|50'>
+					<span><b>Email Address</b></span>
+					<input type=text name=Email required></input>
+				</div>
+			</div>
+			<div class=r__ID>
+				<div w='100|100'>
+                    <button type=submit >Open SnapForms</button>
+                    <button id=submit__ID type=button style='display:none'>Preview Email</button>
+				</div>
+			</div>
+			<br><br>
+    	</form>
+    </section>
+	VmInclude:__COMPONENT__/m/model.01.html
+    <script>
+    	function F__ID(){
+    		//-------------------------------------
+			/*V mInclude:__COMPONENT__/f/form.01.js*/
+			new ResizeObserver($vm.responsive).observe(form_container__ID);
+			//-------------------------------------
+			$('#F__ID').submit( function(){
+				$('#submit__ID').triggerHandler('click');
+				return false;
+			})
+            $('#submit__ID').on('click',function(){
+				var First_Name=$('#F__ID input[name=First_Name]').val();
+                var Last_Name=$('#F__ID input[name=Last_Name]').val();
+                var Date_of_Birth=$('#F__ID input[name=Date_of_Birth]').val();
+                var Email=$('#F__ID input[name=Email]').val();
+
+				var txt="https://wimr.snapforms.com.au/form/sleep-registration?first%20name=[FIRST_NAME]&surname=[LAST_NAME]&dob=[DOB]&patient%20email=[EMAIL]"
+                txt=txt.replace(/\[FIRST_NAME\]/g,First_Name);                    
+                txt=txt.replace(/\[LAST_NAME\]/g,Last_Name);                    
+                txt=txt.replace(/\[DOB\]/g,Date_of_Birth);                    
+                txt=txt.replace(/\[EMAIL\]/g,Email);                    
+				window.open(txt);
+
+            })
+			//-------------------------------------
+		}
+    </script>
+    <style>
+        #form_container__ID{
+            max-width:700px;
+        }
+		/*VmInclude:__CURRENT_PATH__form.css*/
+    </style>
+</div>
